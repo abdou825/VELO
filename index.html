@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>VELO</title>
+    <link rel="icon" type="image/png" href="لوجو.png">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="لوجو.png" alt="VELO Logo" class="site-logo">
+    </div>
+    <h1>مرحبا بكم فى VELO</h1>
+    <a href="en.html" class="lang-btn">English</a>
+    <marquee direction="" >
+            <p><strong>منصة عربية للتحكم فى سرعة الملفات الصوتية</strong></p>
+    </marquee>
+    <div class="audio-card">
+        <h2>غير سرعة الملفات الصوتية</h2>
+        <label for="audio-upload" class="upload-btn">اختر الملف الصوتى</label>
+        <input type="file" id="audio-upload" accept="audio/*">
+        <div id="file-name" class="file-name">لم يتم اختيار ملف صوتى بعد</div>
+        <audio id="audio-element" controls></audio>
+        <div class="controls-container">
+            <div class="controls-group">
+                <label>السرعة<span id="speed-val">1.0</span>x</label>
+                <input type="range" id="speed-slider" min="0.5" max="2.0" step="0.1" value="1">
+            </div>
+            <div class="control-group">
+                <label>طبقة الصوت (Pitch): <span id="pitch-val"></span>x</label>
+                <input type="range" id="pitch-slider" min="0.5" max="2.0" step="0.1" value="1">
+            </div>
+        </div>
+    </div>
+    <script src="main.js">
+        localStorage.setItem('preferredLang', 'ar');
+    </script>
+</body>
+</html>
