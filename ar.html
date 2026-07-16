@@ -3,78 +3,480 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELO - السرعة</title>
+    <title>VELO - تعديل سرعة الصوت الفعال</title>
+    <!-- استدعاء ملف الستايل الخاص بموقعك -->
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="لوجو.png">
+    <link icon="image/png" href="لوجو.png">
+    <style>
+        /* تنسيقات واجهة مشغل الصوت المتقدم */
+        .tool-container {
+            max-width: 650px;
+            margin: 120px auto 50px;
+            background-color: #121214;
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(57, 255, 20, 0.15);
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            font-family: sans-serif;
+        }
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            padding: 40px 20px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.01);
+        }
+        .upload-area:hover {
+            border-color: #39ff14;
+            background-color: rgba(57, 255, 20, 0.03);
+        }
+        .file-info {
+            font-size: 1.1rem;
+            color: #ffffff;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        /* حاوية المشغل تظهر بعد الرفع وتكون مخفية بالبداية */
+        #player-container {
+            display: none; /* يتم تفعيله برمجياً عبر الجافا سكريبت */
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .custom-player-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: space-between;
+        }
+        .play-button {
+            background: #39ff14;
+            border: none;
+            color: #000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        .play-button:hover {
+            transform: scale(1.08);
+        }
+        .progress-container {
+            flex-grow: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #39ff14;
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.1s linear;
+        }
+        .time-display {
+            font-size: 0.85rem;
+            color: #888e9b;
+            min-width: 80px;
+            text-align: left;
+        }
+        .speed-control-box {
+            margin: 20px 0;
+            text-align: right;
+        }
+        .speed-control-box label {
+            display: block;
+            margin-bottom: 12px;
+            color: #888e9b;
+            font-size: 0.95rem;
+        }
+        .speed-slider {
+            width: 100%;
+            accent-color: #39ff14;
+            height: 6px;
+            border-radius: 5px;
+            outline: none;
+        }
+        .speed-presets {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+        .speed-opt {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .speed-opt.active, .speed-opt:hover {
+            background: #39ff14;
+            color: #000;
+            border-color: #39ff14;
+        }
+        .download-action-btn {
+            background: linear-gradient(135deg, #39ff14 0%, #00bcd4 100%);
+            color: #000;
+            border: none;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 1.05rem;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        .download-action-btn:hover {
+            box-shadow: 0 5px 20px rgba(57, 255, 20, 0.4);
+            transform: translateY(-2px);
+        }
+        .download-action-btn:disabled {
+            background: #333;
+            color: #777;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+    </style>
 </head>
 <body>
 
-    <header class="main-header">
-        <a href="ar.html" class="header-logo">VELO<span>.</span></a>
-        <nav class="nav-links">
-            <a href="ar.html" class="active">السرعة</a>
-            <a href="translate.html">الترجمة</a>
-            <a href="compress_ar.html">الضغط</a>
-            <a href="index.html">الرئيسية</a>
-        </nav>
-        <a href="en.html" class="header-lang-btn">English</a>
-    </header>
-
-    <div class="main-wrapper">
-        <p class="brand-sub">تعديل سرعة ملفاتك الصوتية وتنزيلها فوراً</p>
-        <div class="logo-container">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-glow">VELO</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="ar.html" style="color: #39ff14;">تعديل السرعة</a></li>
+                <li><a href="compress_ar.html">ضغط الصوت</a></li>
+                <li><a href="translate.html">مترجم النصوص</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="logo-container">
             <div class="logo-wrapper">
         <!-- تأكد من وضع مسار الصورة الصحيح للوجو الخاص بك هنا -->
                 <img src="لوجو.png" alt="VELO Logo" class="logo-img">
             </div>
+    </div>
+
+    <!-- حاوية أداة تعديل السرعة المدمجة -->
+    <div class="tool-container">
+        <h2 style="color: #fff; margin-bottom: 10px;">⚡ معدل سرعة الصوت الفعال</h2>
+        <p style="color: #888e9b; margin-bottom: 30px; font-size: 0.9rem;">اسحب ملفك الصوتي أو اضغط بالأسفل لبدء المعالجة والتحميل الفوري.</p>
+
+        <!-- منطقة السحب والإفلات وتحديد الملف -->
+        <div class="upload-area" id="dropzone" onclick="document.getElementById('audio-upload').click()">
+            <div style="font-size: 3.5rem; margin-bottom: 15px;">📥</div>
+            <div id="file-name" style="color: #888e9b;">اسحب وأفلت الملف الصوتي هنا أو اضغط للتصفح</div>
+            <input type="file" id="audio-upload" accept="audio/*" style="display: none;">
         </div>
 
-        <div class="audio-card">
-            <h2>⚡ التحكم في سرعة الصوت</h2>
-            
-            <label for="audio-upload" class="dropzone" id="dropzone">
-                <span style="font-size: 24px; display: block;">🎵</span>
-                <p>اسحب وأفلت الملف الصوتي هنا أو <strong>اضغط للتصفح</strong></p>
-                <div id="file-name" class="file-name"></div>
-            </label>
-            <input type="file" id="audio-upload" accept="audio/*">
+        <!-- مشغل الصوت الأساسي (مخفي، يُستخدم للتشغيل في الخلفية) -->
+        <audio id="main-audio" style="display: none;"></audio>
 
-            <audio id="main-audio"></audio>
-
-            <div class="custom-player" id="player-container" style="display: none;">
-                <div class="playback-row">
-                    <button class="play-pause-btn" id="play-btn">▶</button>
+        <!-- لوحة التحكم الاحترافية للمستخدم (تظهر برمجياً بعد الرفع) -->
+        <div id="player-container">
+            <!-- شريط تشغيل الصوت المخصص -->
+            <div class="custom-player-bar">
+                <button class="play-button" id="play-btn">▶</button>
+                <div class="progress-container" id="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
                 </div>
-
-                <div class="progress-container">
-                    <span class="time-display" id="current-time">00:00</span>
-                    <div class="custom-progress-bar" id="progress-bar">
-                        <div class="progress-fill" id="progress-fill"></div>
-                    </div>
-                    <span class="time-display" id="duration">00:00</span>
+                <div class="time-display">
+                    <span id="current-time">00:00</span> / <span id="duration">00:00</span>
                 </div>
-
-                <div class="speed-wrapper">
-                    <div class="speed-label-row">
-                        <span>سرعة التشغيل</span>
-                        <span><span id="speed-val">1.0</span>x</span>
-                    </div>
-                    <input type="range" id="speed-slider" class="custom-slider" min="0.5" max="2.0" step="0.1" value="1">
-                    
-                    <div class="quick-speeds">
-                        <button class="speed-opt" data-speed="0.5">0.5x</button>
-                        <button class="speed-opt active" data-speed="1.0">1.0x</button>
-                        <button class="speed-opt" data-speed="1.5">1.5x</button>
-                        <button class="speed-opt" data-speed="2.0">2.0x</button>
-                    </div>
-                </div>
-
-                <button class="action-btn download-btn" id="download-btn">💾 تحميل الملف الصوتي المعدل</button>
             </div>
+
+            <!-- التحكم بالسرعة -->
+            <div class="speed-control-box">
+                <label>التحكم في سرعة الملف الصوتي: <strong style="color: #39ff14;" id="speed-val">1.0</strong>x</label>
+                <input type="range" class="speed-slider" id="speed-slider" min="0.5" max="2.0" step="0.1" value="1.0">
+                
+                <!-- أزرار السرعة السريعة -->
+                <div class="speed-presets">
+                    <button class="speed-opt" data-speed="0.5">0.5x (بطيء)</button>
+                    <button class="speed-opt active" data-speed="1.0">العادية</button>
+                    <button class="speed-opt" data-speed="1.5">1.5x</button>
+                    <button class="speed-opt" data-speed="2.0">2.0x (سريع)</button>
+                </div>
+            </div>
+
+            <!-- زر التحميل النهائي الفعال -->
+            <button class="download-action-btn" id="download-btn">💾 تحميل الملف الصوتي المعدل</button>
         </div>
     </div>
 
-    <script src="main.js"></script>
+    <!-- تفعيل منطق الجافا سكريبت الكامل والمعدل لحل مشاكل المتصفحات المانعة للصوت تلقائياً -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fileInput = document.getElementById('audio-upload');
+            const dropzone = document.getElementById('dropzone');
+            const audio = document.getElementById('main-audio');
+            const playBtn = document.getElementById('play-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const progressFill = document.getElementById('progress-fill');
+            const currentTimeText = document.getElementById('current-time');
+            const durationText = document.getElementById('duration');
+            const speedSlider = document.getElementById('speed-slider');
+            const speedVal = document.getElementById('speed-val');
+            const downloadBtn = document.getElementById('download-btn');
+            const playerContainer = document.getElementById('player-container');
+            const fileNameDiv = document.getElementById('file-name');
+
+            let audioBuffer = null;
+
+            // --- 1. ميزة السحب والإفلات ---
+            dropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropzone.style.borderColor = '#39ff14';
+                dropzone.style.background = 'rgba(57, 255, 20, 0.05)';
+            });
+
+            dropzone.addEventListener('dragleave', () => {
+                dropzone.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                dropzone.style.background = 'rgba(255, 255, 255, 0.01)';
+            });
+
+            dropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropzone.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                dropzone.style.background = 'rgba(255, 255, 255, 0.01)';
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0 && files[0].type.startsWith('audio/')) {
+                    fileInput.files = files;
+                    handleAudioFile(files[0]);
+                } else {
+                    alert('عذراً، يرجى سحب ملف صوتي صالح فقط!');
+                }
+            });
+
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) handleAudioFile(file);
+            });
+
+            // --- 2. معالجة وتجهيز الملف الصوتي بشكل مستقر وآمن ---
+            function handleAudioFile(file) {
+                fileNameDiv.textContent = 'جاري تحليل وقراءة الملف الصوتي... ⏳';
+                playerContainer.style.display = 'none';
+                
+                // ربط ملف الصوت بالمشغل الأساسي للمتصفح
+                const fileURL = URL.createObjectURL(file);
+                audio.src = fileURL;
+                
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    const ctx = new AudioCtx();
+                    
+                    ctx.decodeAudioData(evt.target.result, function(buffer) {
+                        audioBuffer = buffer;
+                        fileNameDiv.textContent = `🎵 ${file.name}`;
+                        playerContainer.style.display = 'flex'; // إظهار المشغل فور اكتمال التجهيز
+                        
+                        // إعادة تهيئة قيم التشغيل والسرعة
+                        audio.playbackRate = 1.0;
+                        speedSlider.value = 1.0;
+                        speedVal.textContent = "1.0";
+                        playBtn.textContent = '▶';
+                    }, function(err) {
+                        console.error("Decoder Error:", err);
+                        fileNameDiv.textContent = '❌ خطأ في قراءة وتحليل ملف الصوت';
+                        alert('عذراً، واجهنا مشكلة في فك تشفير هذا الملف الصوتي. تأكد أنه ملف يعمل بصيغة مثل mp3 أو wav أو m4a.');
+                    });
+                };
+                
+                reader.onerror = function() {
+                    fileNameDiv.textContent = '❌ خطأ أثناء قراءة الملف';
+                };
+
+                reader.readAsArrayBuffer(file);
+            }
+
+            // --- 3. تشغيل وإيقاف الصوت تلقائياً ---
+            playBtn.addEventListener('click', async () => {
+                // تفعيل وضع الأوديو في المتصفحات التي تشترط نقرة لتشغيل الصوت
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                const tempCtx = new AudioCtx();
+                if (tempCtx.state === 'suspended') {
+                    await tempCtx.resume();
+                }
+
+                if (audio.paused) {
+                    audio.play();
+                    playBtn.textContent = '⏸';
+                } else {
+                    audio.pause();
+                    playBtn.textContent = '▶';
+                }
+            });
+
+            audio.addEventListener('timeupdate', () => {
+                if (!isNaN(audio.duration)) {
+                    const pct = (audio.currentTime / audio.duration) * 100;
+                    progressFill.style.width = pct + '%';
+                    currentTimeText.textContent = formatTime(audio.currentTime);
+                    durationText.textContent = formatTime(audio.duration);
+                }
+            });
+
+            audio.addEventListener('loadedmetadata', () => {
+                currentTimeText.textContent = "00:00";
+                durationText.textContent = formatTime(audio.duration);
+            });
+
+            progressBar.addEventListener('click', (e) => {
+                const rect = progressBar.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const pct = clickX / rect.width;
+                if (!isNaN(audio.duration)) {
+                    audio.currentTime = pct * audio.duration;
+                }
+            });
+
+            function formatTime(secs) {
+                if (isNaN(secs) || secs === Infinity) return "00:00";
+                const m = Math.floor(secs / 60).toString().padStart(2, '0');
+                const s = Math.floor(secs % 60).toString().padStart(2, '0');
+                return `${m}:${s}`;
+            }
+
+            // --- 4. التحكم في سرعة التشغيل الفورية والـ Presets ---
+            function updateSpeed(val) {
+                audio.playbackRate = parseFloat(val);
+                speedSlider.value = val;
+                speedVal.textContent = parseFloat(val).toFixed(1);
+                
+                document.querySelectorAll('.speed-opt').forEach(btn => {
+                    if (parseFloat(btn.dataset.speed) === parseFloat(val)) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            speedSlider.addEventListener('input', (e) => {
+                updateSpeed(e.target.value);
+            });
+
+            document.querySelectorAll('.speed-opt').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    updateSpeed(btn.dataset.speed);
+                });
+            });
+
+            // --- 5. تصدير وتنزيل الملف الصوتي بالسرعة الجديدة بنجاح ---
+            downloadBtn.addEventListener('click', async () => {
+                if (!audioBuffer) {
+                    alert('الرجاء اختيار ملف صوتي أولاً!');
+                    return;
+                }
+
+                downloadBtn.textContent = 'جاري معالجة السرعة وتصدير الملف... ⚡';
+                downloadBtn.disabled = true;
+
+                try {
+                    const rate = parseFloat(speedSlider.value);
+                    const numChannels = audioBuffer.numberOfChannels;
+                    const oldLength = audioBuffer.length;
+                    
+                    const newLength = Math.round(oldLength / rate);
+                    const sampleRate = audioBuffer.sampleRate;
+
+                    const OfflineCtx = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+                    const offlineCtx = new OfflineCtx(numChannels, newLength, sampleRate);
+
+                    const source = offlineCtx.createBufferSource();
+                    source.buffer = audioBuffer;
+                    
+                    source.playbackRate.setValueAtTime(rate, offlineCtx.currentTime);
+                    source.connect(offlineCtx.destination);
+                    source.start(0);
+
+                    const renderedBuffer = await offlineCtx.startRendering();
+                    const wavBlob = bufferToWav(renderedBuffer);
+                    
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(wavBlob);
+                    link.download = `velo_speed_${rate}x.wav`;
+                    link.click();
+
+                } catch (e) {
+                    console.error("Rendering Error:", e);
+                    alert('حدث خطأ أثناء معالجة وحفظ الملف الصوتي المعدل.');
+                } finally {
+                    downloadBtn.textContent = '💾 تحميل الملف الصوتي المعدل';
+                    downloadBtn.disabled = false;
+                }
+            });
+
+            // دالة تحويل قنوات الصوت إلى هيكل ملف WAV رسمي 16-بت
+            function bufferToWav(buffer) {
+                const numOfChan = buffer.numberOfChannels,
+                    length = buffer.length * numOfChan * 2 + 44,
+                    bufferArr = new ArrayBuffer(length),
+                    view = new DataView(bufferArr),
+                    channels = [], 
+                    sampleRate = buffer.sampleRate;
+
+                let writeOffset = 0;
+
+                function setUint16(data) { view.setUint16(writeOffset, data, true); writeOffset += 2; }
+                function setUint32(data) { view.setUint32(writeOffset, data, true); writeOffset += 4; }
+
+                setUint32(0x46464952); // "RIFF"
+                setUint32(length - 8); 
+                setUint32(0x45564157); // "WAVE"
+                setUint32(0x20746d66); // "fmt " subchunk
+                setUint32(16);         // Chunk size
+                setUint16(1);          // Linear PCM
+                setUint16(numOfChan);
+                setUint32(sampleRate);
+                setUint32(sampleRate * 2 * numOfChan); 
+                setUint16(numOfChan * 2); 
+                setUint16(16);         // Bits per sample (16-bit)
+                setUint32(0x61746164); // "data" subchunk
+                setUint32(length - writeOffset - 4);
+
+                for (let i = 0; i < numOfChan; i++) {
+                    channels.push(buffer.getChannelData(i));
+                }
+
+                for (let i = 0; i < buffer.length; i++) {
+                    for (let channel = 0; channel < numOfChan; channel++) {
+                        let sample = Math.max(-1, Math.min(1, channels[channel][i]));
+                        sample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+                        view.setInt16(writeOffset, sample, true);
+                        writeOffset += 2;
+                    }
+                }
+                return new Blob([bufferArr], { type: 'audio/wav' });
+            }
+        });
+    </script>
 </body>
 </html>
