@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELO - Translation</title>
+    <link rel="stylesheet" href="translate.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="لوجو.png">
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="en.html" class="header-logo">VELO<span>.</span></a>
+        <nav class="nav-links">
+            <a href="en.html">Speed</a>
+            <a href="translate_en.html" class="active">Translation</a>
+            <a href="compress_en.html">Compress</a>
+        </nav>
+        <a href="translate.html" class="header-lang-btn">العربية</a>
+    </header>
+
+    <div class="main-wrapper">
+        <p class="brand-sub">Transcribe and translate your audio instantly</p>
+        <div class="logo-container">
+            <div class="logo-wrapper">
+        <!-- تأكد من وضع مسار الصورة الصحيح للوجو الخاص بك هنا -->
+                <img src="لوجو.png" alt="VELO Logo" class="logo-img">
+            </div>
+        </div>
+
+        <div class="audio-card">
+            <h2>🎙️ Audio Transcription & Translation</h2>
+            
+            <label for="audio-upload" class="dropzone">
+                <span style="font-size: 20px; display: block;">📤</span>
+                <p>Drag & drop audio file or <strong>browse</strong></p>
+                <div id="file-name" class="file-name"></div>
+            </label>
+            <input type="file" id="audio-upload" accept="audio/*">
+
+            <div class="form-group">
+                <label>Audio Source Language</label>
+                <select id="source-lang">
+                    <option value="auto">Auto Detect</option>
+                    <option value="en">English</option>
+                    <option value="ar">Arabic</option>
+                </select>
+            </div>
+
+            <button class="action-btn" id="start-btn">Start Transcription</button>
+
+            <div class="form-group">
+                <label>Transcribed / Translated Text</label>
+                <textarea id="result-box" rows="5" placeholder="Result text will appear here..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="translateen.js">
+        const fileInput = document.getElementById('audio-upload');
+        const fileNameDiv = document.getElementById('file-name');
+        const startBtn = document.getElementById('start-btn');
+        const resultBox = document.getElementById('result-box');
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                fileNameDiv.textContent = file.name;
+            }
+        });
+
+        startBtn.addEventListener('click', () => {
+            if(!fileInput.files[0]) {
+                alert('Please select an audio file first!');
+                return;
+            }
+            startBtn.textContent = 'Transcribing...';
+            startBtn.disabled = true;
+
+            setTimeout(() => {
+                resultBox.value = "Transcription simulated successfully!\n\nWelcome to VELO smart audio suite.";
+                startBtn.textContent = 'Start Transcription';
+                startBtn.disabled = false;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

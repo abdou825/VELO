@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELO - ضغط الملفات</title>
+    <link rel="stylesheet" href="compress.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="لوجو.png">
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="index.html" class="header-logo">VELO<span>.</span></a>
+        <nav class="nav-links">
+            <a href="ar.html">السرعة</a>
+            <a href="translate.html">الترجمة</a>
+            <a href="compress_ar.html" class="active">الضغط</a>
+            <a href="index.html">الرئيسية</a>
+        </nav>
+        <a href="compress_en.html" class="header-lang-btn">English</a>
+    </header>
+
+    <div class="main-wrapper">
+        <p class="brand-sub">تقليل حجم الملفات الصوتية مع الحفاظ على الجودة</p>
+        <div class="logo-container">
+            <div class="logo-wrapper">
+        <!-- تأكد من وضع مسار الصورة الصحيح للوجو الخاص بك هنا -->
+                <img src="لوجو.png" alt="VELO Logo" class="logo-img">
+            </div>
+        </div>
+
+        <div class="audio-card">
+            <h2>📉 ضغط الملفات الصوتية</h2>
+            
+            <label for="audio-upload" class="dropzone">
+                <span style="font-size: 24px; display: block;">📂</span>
+                <p>اسحب وأفلت الملف الصوتي المراد ضغطه هنا</p>
+            </label>
+            <input type="file" id="audio-upload" accept="audio/*" style="display: none;">
+
+            <div class="form-group">
+                <label>مستوى الضغط المطلوب</label>
+                <select id="compress-level">
+                    <option value="high">ضغط عالي (أقل حجم ممكن)</option>
+                    <option value="medium" selected>متوسط (متوازن)</option>
+                    <option value="low">خفيف (أعلى جودة)</option>
+                </select>
+            </div>
+
+            <button class="action-btn" style="background-color: #10b981; color: white;">بدء عملية الضغط</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+    <script src="compress_ar.js"></script>
+
+</body>
+</html>

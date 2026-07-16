@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELO - الترجمة</title>
+    <!-- تم ربط ملف التنسيق الخاص بالترجمة بنجاح لإنهاء مشكلة الصفحة البيضاء -->
+    <link rel="stylesheet" href="translate.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="لوجو.png">
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="ar.html" class="header-logo">VELO<span>.</span></a>
+        <nav class="nav-links">
+            <a href="ar.html">السرعة</a>
+            <a href="translate.html" class="active">الترجمة</a>
+            <a href="compress_ar.html">الضغط</a>
+            <a href="index.html">الرئيسية</a>
+        </nav>
+        <a href="translateen.html" class="header-lang-btn">English</a>
+    </header>
+
+    <div class="main-wrapper">
+        <p class="brand-sub">ترجمة النصوص والملفات بسهولة ودقة عالية</p>
+        <div class="logo-container">
+            <div class="logo-wrapper">
+        <!-- تأكد من وضع مسار الصورة الصحيح للوجو الخاص بك هنا -->
+                <img src="لوجو.png" alt="VELO Logo" class="logo-img">
+            </div>
+        </div>
+
+        <div class="audio-card">
+            <h2>🌐 مترجم النصوص الذكي</h2>
+            
+            <div class="form-group">
+                <label>لغة المصدر</label>
+                <select id="source-lang">
+                    <option value="auto">كشف تلقائي</option>
+                    <option value="ar">العربية</option>
+                    <option value="en">الإنجليزية</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>اللغة الهدف</label>
+                <select id="target-lang">
+                    <option value="en">الإنجليزية</option>
+                    <option value="ar">العربية</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>النص المراد ترجمته</label>
+                <textarea id="source-text" placeholder="اكتب أو الصق النص هنا..."></textarea>
+            </div>
+
+            <button class="action-btn" id="translate-btn">ترجم الآن</button>
+
+            <div class="form-group" style="margin-top: 15px;">
+                <label>الترجمة</label>
+                <textarea id="result-text" readonly placeholder="ستظهر الترجمة هنا..."></textarea>
+            </div>
+        </div>
+    </div>
+    <script src="translate.js"></script>
+
+</body>
+</html>

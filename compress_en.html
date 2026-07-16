@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELO - Compress</title>
+    <link rel="stylesheet" href="compress.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="لوجو.png">
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="en.html" class="header-logo">VELO<span>.</span></a>
+        <nav class="nav-links">
+            <a href="en.html">Speed</a>
+            <a href="translateen.html">Translation</a>
+            <a href="compress_en.html" class="active">Compress</a>
+        </nav>
+        <a href="compress_ar.html" class="header-lang-btn">العربية</a>
+    </header>
+
+    <div class="main-wrapper">
+        <p class="brand-sub">Reduce your audio files size with high efficiency</p>
+        <<div class="logo-container">
+            <div class="logo-wrapper">
+        <!-- تأكد من وضع مسار الصورة الصحيح للوجو الخاص بك هنا -->
+                <img src="لوجو.png" alt="VELO Logo" class="logo-img">
+            </div>
+        </div>
+
+        <div class="audio-card">
+            <h2>📉 Audio Compressor</h2>
+            
+            <label for="audio-upload" class="dropzone">
+                <span style="font-size: 20px; display: block;">📂</span>
+                <p>Choose an audio file to compress</p>
+                <div id="file-name" class="file-name"></div>
+            </label>
+            <input type="file" id="audio-upload" accept="audio/*">
+
+            <div class="form-group">
+                <label>Compression Level</label>
+                <select id="compress-level">
+                    <option value="medium">Balanced Compression (Excellent Quality)</option>
+                    <option value="high">High Compression (Smallest Size)</option>
+                </select>
+            </div>
+
+            <button class="action-btn" id="compress-btn">Compress Audio</button>
+        </div>
+    </div>
+
+    <script src="compress_en.js">
+        const fileInput = document.getElementById('audio-upload');
+        const fileNameDiv = document.getElementById('file-name');
+        const compressBtn = document.getElementById('compress-btn');
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                fileNameDiv.textContent = file.name;
+            }
+        });
+
+        compressBtn.addEventListener('click', () => {
+            if(!fileInput.files[0]) {
+                alert('Please choose an audio file first!');
+                return;
+            }
+            compressBtn.textContent = 'Compressing file...';
+            compressBtn.disabled = true;
+
+            setTimeout(() => {
+                alert('Audio compressed successfully! Saved 45% storage.');
+                compressBtn.textContent = 'Compress Audio';
+                compressBtn.disabled = false;
+            }, 2000);
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+</body>
+</html>

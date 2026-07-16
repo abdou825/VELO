@@ -1,40 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELO - Home</title>
-    <!-- ربط ملف التنسيق المخصص والمنفصل -->
+    <title>VELO - السرعة</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="لوجو.png">
 </head>
 <body>
 
     <header class="main-header">
-        <a href="en.html" class="header-logo">VELO<span>.</span></a>
+        <a href="ar.html" class="header-logo">VELO<span>.</span></a>
         <nav class="nav-links">
-            <a href="en.html" class="active">Speed</a>
-            <a href="translateen.html">Translation</a>
-            <a href="compress_en.html">Compress</a>
+            <a href="ar.html" class="active">السرعة</a>
+            <a href="translate.html">الترجمة</a>
+            <a href="compress_ar.html">الضغط</a>
+            <a href="index.html">الرئيسية</a>
         </nav>
-        <a href="index.html" class="header-lang-btn">العربية</a>
+        <a href="en.html" class="header-lang-btn">English</a>
     </header>
 
     <div class="main-wrapper">
-        <p class="brand-sub">Change playback speed of your audio and download the modified file</p>
+        <p class="brand-sub">تعديل سرعة ملفاتك الصوتية وتنزيلها فوراً</p>
         <div class="logo-container">
             <div class="logo-wrapper">
         <!-- تأكد من وضع مسار الصورة الصحيح للوجو الخاص بك هنا -->
                 <img src="لوجو.png" alt="VELO Logo" class="logo-img">
             </div>
         </div>
+
         <div class="audio-card">
-            <h2>⚡ Audio Speed Control</h2>
+            <h2>⚡ التحكم في سرعة الصوت</h2>
             
             <label for="audio-upload" class="dropzone" id="dropzone">
-                <span style="font-size: 20px; display: block;">🎵</span>
-                <p>Drag & drop audio here or <strong>browse</strong></p>
+                <span style="font-size: 24px; display: block;">🎵</span>
+                <p>اسحب وأفلت الملف الصوتي هنا أو <strong>اضغط للتصفح</strong></p>
                 <div id="file-name" class="file-name"></div>
             </label>
             <input type="file" id="audio-upload" accept="audio/*">
@@ -56,8 +57,8 @@
 
                 <div class="speed-wrapper">
                     <div class="speed-label-row">
-                        <span>Playback Speed</span>
-                        <span><span id="speed-val" class="speed-val-highlight">1.0</span>x</span>
+                        <span>سرعة التشغيل</span>
+                        <span><span id="speed-val">1.0</span>x</span>
                     </div>
                     <input type="range" id="speed-slider" class="custom-slider" min="0.5" max="2.0" step="0.1" value="1">
                     
@@ -69,12 +70,11 @@
                     </div>
                 </div>
 
-                <button class="action-btn download-btn" id="download-btn">💾 Download Modified Audio</button>
+                <button class="action-btn download-btn" id="download-btn">💾 تحميل الملف الصوتي المعدل</button>
             </div>
         </div>
     </div>
 
-    <!-- ربط ملف الـ JS الخارجي بأمان -->
     <script src="main.js"></script>
 </body>
 </html>

@@ -3,38 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>VELO</title>
+    <title>VELO - بوابة تطبيقات OMNIX</title>
+    <!-- ربط ملف الـ CSS الخارجي المطور -->
+    <link rel="stylesheet" href="home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="لوجو.png">
 </head>
 <body>
-    <div class="logo-container">
-        <img src="لوجو.png" alt="VELO Logo" class="site-logo">
-    </div>
-    <h1>مرحبا بكم فى VELO</h1>
-    <a href="en.html" class="lang-btn">English</a>
-    <marquee direction="" >
-            <p><strong>منصة عربية للتحكم فى سرعة الملفات الصوتية</strong></p>
-    </marquee>
-    <div class="audio-card">
-        <h2>غير سرعة الملفات الصوتية</h2>
-        <label for="audio-upload" class="upload-btn">اختر الملف الصوتى</label>
-        <input type="file" id="audio-upload" accept="audio/*">
-        <div id="file-name" class="file-name">لم يتم اختيار ملف صوتى بعد</div>
-        <audio id="audio-element" controls></audio>
-        <div class="controls-container">
-            <div class="controls-group">
-                <label>السرعة<span id="speed-val">1.0</span>x</label>
-                <input type="range" id="speed-slider" min="0.5" max="2.0" step="0.1" value="1">
+
+    <!-- شريط التنقل العلوي (Navbar) -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-glow">VELO</span>
             </div>
-            <div class="control-group">
-                <label>طبقة الصوت (Pitch): <span id="pitch-val"></span>x</label>
-                <input type="range" id="pitch-slider" min="0.5" max="2.0" step="0.1" value="1">
+            <ul class="nav-links">
+                <li><a href="#about">من نحن</a></li>
+                <li><a href="#features">الميزات</a></li>
+                <li><a href="#products">منظومة تطبيقاتنا</a></li>
+            </ul>
+            <a href="https://omnixllc.lovable.app" target="_blank" class="btn-nav">الموقع الرسمي لـ OMNIX</a>
+        </div>
+    </nav>
+
+    <!-- قسم الترحيب والبطولة -->
+    <header class="hero">
+        <div class="logo-container">
+            <div class="logo-wrapper">
+                <img src="لوجو.png" alt="VELO Logo" class="logo-img">
             </div>
         </div>
-    </div>
-    <script src="main.js">
-        localStorage.setItem('preferredLang', 'ar');
-    </script>
+        <h1>مرحباً بك في منصة VELO</h1>
+        <p>بوابتك الذكية والحديثة لإدارة وتعديل الملفات الصوتية رقمياً بجودة لا تضاهى، وبداية انطلاقك لاستكشاف أقوى تطبيقات ومنتجات بيئة OMNIX المتكاملة.</p>
+        <div class="hero-actions">
+            <a href="#products" class="btn-primary">استكشف منتجاتنا</a>
+            <a href="https://omnixllc.lovable.app" target="_blank" class="btn-secondary-hero">زيارة شركة OMNIX</a>
+        </div>
+    </header>
+
+    <!-- قسم من نحن -->
+    <section id="about">
+        <h2 class="section-title">من نحن</h2>
+        <div class="about-grid">
+            <div class="about-col about-text">
+                <h3>رؤية جديدة للهندسة الصوتية والتكنولوجيا الرقمية</h3>
+                <p>تأسست منصة VELO لتقديم أدوات معالجة صوتية فائقة السرعة تعمل بالكامل داخل متصفحك للحفاظ على خصوصيتك المطلقة وبأداء لا يضاهى.</p>
+                <p>نحن لا نقدم مجرد أداة فردية، بل نمثل واجهة تفاعلية لمنظومة تقنية متكاملة برعاية شركة <strong>OMNIX</strong>، نهدف من خلالها لتطوير الويب، والذكاء الاصطناعي، ونظم التشغيل بأيدي وخبرات عربية متطورة.</p>
+            </div>
+            <div class="about-col icon-col">
+                <div class="about-graphic">⚡</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم منتجات المنصة (Products Grid Showcase) -->
+    <section id="products">
+        <h2 class="section-title">منظومة تطبيقات OMNIX</h2>
+        <p class="section-subtitle">تعرف على باقة المنتجات الذكية والمنصات الرائدة التابعة لبيئتنا البرمجية</p>
+        
+        <div class="products-grid">
+            
+            <!-- 1. Pulse -->
+            <div class="product-card">
+                <div class="prod-badge badge-social">تواصل اجتماعي</div>
+                <div class="prod-icon">🌐</div>
+                <h3>Pulse</h3>
+                <p>منصتك الاجتماعية الحرة والبديل العصري والآمن لفيسبوك لتتواصل مع أصدقائك بخصوصية تامة.</p>
+                <a href="https://pulse-omnix.lovable.app" target="_blank" class="prod-link-btn">زيارة Pulse</a>
+            </div>
+
+            <!-- 2. AXONIQ AI -->
+            <div class="product-card">
+                <div class="prod-badge badge-ai">ذكاء اصطناعي</div>
+                <div class="prod-icon">🤖</div>
+                <h3>AXONIQ AI</h3>
+                <p>مساعدك الشخصي الذكي والوكيل البرمجي القوي لإنجاز مهامك وتوليد الحلول والأفكار بلحظات.</p>
+                <a href="https://agent.jotform.com/01999feb586f7f22bc2e40ecd0f77e2ca2d9" target="_blank" class="prod-link-btn">تشغيل المساعد</a>
+            </div>
+
+            <!-- 3. School Learn -->
+            <div class="product-card">
+                <div class="prod-badge badge-edu">مساعد دراسي</div>
+                <div class="prod-icon">🎓</div>
+                <h3>School Learn</h3>
+                <p>رفيقك الأكاديمي والتعليمي المدعوم بالذكاء الاصطناعي لتبسيط المناهج والإجابة على استفساراتك الدراسية.</p>
+                <a href="https://app.edcafe.ai/chatbots/694bc76c77a50eb783944f0c" target="_blank" class="prod-link-btn">ابدأ التعلم</a>
+            </div>
+
+            <!-- 4. OMNIX Translate -->
+            <div class="product-card">
+                <div class="prod-badge badge-tool">أدوات الترجمة</div>
+                <div class="prod-icon">🗣️</div>
+                <h3>OMNIX Translate</h3>
+                <p>تطبيق الترجمة الفوري الاحترافي لكسر حواجز اللغات وترجمة النصوص والمقالات بدقة متناهية.</p>
+                <a href="https://omnix-translate.lovable.app" target="_blank" class="prod-link-btn">ترجم الآن</a>
+            </div>
+
+            <!-- 5. OMNIX Aero -->
+            <div class="product-card dev-card">
+                <div class="prod-badge badge-dev">قيد التطوير ⏳</div>
+                <div class="prod-icon">🧭</div>
+                <h3>OMNIX Aero</h3>
+                <p>متصفح ويب فائق الخفة والسرعة مدمج بمحرك بحث جوجل ومطور خصيصاً لتجربة تصفح آمنة وسلسة.</p>
+                <span class="prod-link-btn disabled">قريباً جداً</span>
+            </div>
+
+            <!-- 6. OIX 27 -->
+            <div class="product-card">
+                <div class="prod-badge badge-os">نظام تشغيل 🇪🇬</div>
+                <div class="prod-icon">📱</div>
+                <h3>OIX 27</h3>
+                <p>نظام تشغيل عربي مصري متطور، قريباً سوف يتم إطلاقه ليدير هواتف OMNIX الذكية بكفاءة لا مثيل لها.</p>
+                <a href="https://oix-os-dashboard-32710971962.us-west1.run.app/" target="_blank" class="prod-link-btn btn-os">لوحة التحكم OIX</a>
+            </div>
+
+            <!-- 7. Audio to Text -->
+            <div class="product-card">
+                <div class="prod-badge badge-ai">تحويل صوتي</div>
+                <div class="prod-icon">🎙️</div>
+                <h3>Audio to Text</h3>
+                <p>محول الصوت الذكي لتفريغ التسجيلات الصوتية والملفات إلى نصوص مكتوبة بدقة وكفاءة عبر الذكاء الاصطناعي.</p>
+                <a href="https://ai.studio/apps/50021029-25b6-42e1-9110-183f9dffd6e2?fullscreenApplet=true" target="_blank" class="prod-link-btn">حوّل الصوت الآن</a>
+            </div>
+            <div class="product-card">
+                <div class="prod-badge badge-ai">خدمات الكترونية</div>
+                <div class="prod-icon">💻</div>
+                <h3>بوابة الخدمات الإلكترونية</h3>
+                <p>بوابة الخدمات الاكترونية هي موقع مخصص فيه جميع الخدمات الحكومية والمصرفية مجمعة</p>
+                <a href="https://abdou825.github.io/bwabet-elkhadmat/" target="_blank" class="prod-link-btn">زيارة الموقع</a>
+            </div>
+
+        </div>
+    </section>
+    <!-- قسم ميزات وأدوات المنصة التفاعلي -->
+    <section id="features">
+        <h2 class="section-title">أدوات منصة VELO</h2>
+        <p class="section-subtitle">اختر الأداة التي تريد استخدامها للبدء فوراً</p>
+        <div class="features-grid">
+            
+            <!-- كارت أداة السرعة -->
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>تعديل السرعة والتشغيل</h3>
+                <p>استمع لملفاتك الصوتية وتحكم في سرعة تشغيلها فورياً وحملها بصيغة MP3.</p>
+                <a href="ar.html" class="prod-link-btn" style="margin-top: 15px;">دخول الأداة</a>
+            </div>
+
+            <!-- كارت أداة الضغط -->
+            <div class="feature-card">
+                <div class="feature-icon">📉</div>
+                <h3>ضغط وحجم الملفات</h3>
+                <p>قم بضغط حجم ملفاتك الصوتية بدقة تامة بالكيلو والميجابايت مع الحفاظ على الجودة.</p>
+                <a href="compress_ar.html" class="prod-link-btn" style="margin-top: 15px;">دخول الأداة</a>
+            </div>
+
+            <!-- كارت أداة الترجمة -->
+            <div class="feature-card">
+                <div class="feature-icon">🗣️</div>
+                <h3>مترجم النصوص الاحترافي</h3>
+                <p>ترجم نصوصك وملفاتك بدقة متناهية عبر محرك الترجمة الذكي والخاص بنا.</p>
+                <a href="translate.html" class="prod-link-btn" style="margin-top: 15px;">دخول الأداة</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- تذييل الصفحة -->
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 لـ <strong>VELO</strong> | برعاية <a href="https://omnixllc.lovable.app" target="_blank" style="color: var(--color-neon-green); font-weight: bold;">OMNIX LLC</a></p>
+        <p>
+            <a href="#about">من نحن</a> | 
+            <a href="#features">الميزات</a> | 
+            <a href="#products">المنتجات</a> | 
+            <a href="https://omnixllc.lovable.app" target="_blank">الموقع الرسمي للشركة</a>
+        </p>
+    </footer>
+
 </body>
 </html>
